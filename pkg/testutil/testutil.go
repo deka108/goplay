@@ -2,13 +2,13 @@ package testutil
 
 import (
 	"fmt"
+	"github.com/deka108/goplay/pkg/env"
 	"github.com/spf13/viper"
-	"os"
 )
 
 func LoadConfig(){
 	viper.SetConfigType("yaml") 
-	viper.SetConfigFile(os.Getenv("CONFIG_FILE"))
+	viper.SetConfigFile(env.GetEnv("CONFIG_FILE", true))
 
 	err := viper.ReadInConfig() // Find and read the config file
 	if err != nil { // Handle errors reading the config file

@@ -3,10 +3,13 @@
 package gcs
 
 import (
+	"cloud.google.com/go/storage"
 	"github.com/deka108/goplay/pkg/testutil"
 	"github.com/spf13/viper"
+	"golang.org/x/oauth2/google"
 
 	"bytes"
+	"context"
 	"fmt"
 	"log"
 	"os"
@@ -42,4 +45,27 @@ func TestGetBucketMetadata(t *testing.T){
 	}
 
 	fmt.Println(buf)
+}
+
+func TestGetCredentials_DefaultLogin(t *testing.T){
+	ctx := context.Background()
+	credentials, error := google.FindDefaultCredentials(ctx, storage.ScopeReadOnly)
+	if error != nil {
+		fmt.Println(error)
+	}
+	fmt.Printf("Project ID: %s\n", credentials.ProjectID)
+	fmt.Printf(string(credentials.JSON))
+}
+
+
+func TestGetCredentials_FromEnvironment(t *testing.T){
+	os.Setenv("GOOGLE_APPLICATION_CREDENTIALS", os.ExpandEnv(viper.GetString("GOOGLE_APPLICATION_CREDENTIALS")))
+
+	ctx := context.Background()
+	credentials, error := google.FindDefaultCredentials(ctx, storage.ScopeReadOnly)
+	if error != nil {
+		fmt.Println(error)
+	}
+	fmt.Printf("Project ID: %s\n", credentials.ProjectID)
+	fmt.Printf("JSON: %s\n", string(credentials.JSON))
 }
