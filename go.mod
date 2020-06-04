@@ -4,8 +4,9 @@ go 1.14
 
 require (
 	cloud.google.com/go/storage v1.8.0
+	github.com/bvinc/go-sqlite-lite v0.6.1
 	github.com/golang/protobuf v1.4.2 // indirect
-	github.com/joho/godotenv v1.3.0
+	github.com/mattn/go-sqlite3 v2.0.3+incompatible
 	github.com/spf13/viper v1.7.0
 	github.com/stretchr/testify v1.4.0
 	golang.org/x/mod v0.3.0 // indirect

@@ -3,7 +3,7 @@
 package general
 
 import (
-	"github.com/deka108/goplay/internal/testutil"
+	"github.com/deka108/goplay/pkg/testutil"
 	"github.com/spf13/viper"
 
 	"fmt"

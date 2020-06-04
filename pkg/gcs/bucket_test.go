@@ -1,24 +1,45 @@
+// +build gcs_test bucket_test
+
 package gcs
 
 import (
-	"github.com/joho/godotenv"
+	"github.com/deka108/goplay/pkg/testutil"
+	"github.com/spf13/viper"
 
-	// "bytes"
-	// "fmt"
-	// "io/ioutil"
+	"bytes"
+	"fmt"
 	"log"
+	"os"
 	"testing"
 )
 
-func TestGetBucketMetadata(t *testing.T){
-	t.Skip()
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading env-databricks.yml file")
+type TestConfig struct {
+	bucket string
+	projectId string
+}
+
+var testConfig TestConfig
+
+func TestMain(m *testing.M) {
+	log.Println("Do stuff BEFORE the tests!")
+	testutil.LoadConfig()
+	testConfig = TestConfig{
+		bucket: viper.GetString("gcs.BUCKET"),
+		projectId: viper.GetString("gcs.PROJECT_ID"),
 	}
-	// buf := new(bytes.Buffer)
-	// bucketName := ''
-	// if _, err := getBucketMetadata(buf, bucketName); err != nil {
-	// 	t.Errorf("getBucketMetadata: %#v", err)
-	// }
+	exitVal := m.Run()
+	log.Println("Do stuff AFTER the tests!")
+
+	os.Exit(exitVal)
+}
+
+func TestGetBucketMetadata(t *testing.T){
+	bucketName := testConfig.bucket
+	buf := new(bytes.Buffer)
+
+	if _, err := getBucketMetadata(buf, bucketName); err != nil {
+		t.Errorf("getBucketMetadata: %#v", err)
+	}
+
+	fmt.Println(buf)
 }

@@ -10,7 +10,7 @@ test-hello:
 	go test -v ./... -run "Hello"
 
 test-gcs:
-	go test -v ./pkg/gcs -run 'Bucket'
+	go test -v ./pkg/gcs -run  --tags=gcs_test
 
 test-file:
 	@CONFIG_FILE=${CURDIR}/configs/config-test.yml go test -v ./pkg/general/... --tags=file_test
