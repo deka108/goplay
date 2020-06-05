@@ -13,7 +13,7 @@ require (
 	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d
 	golang.org/x/sys v0.0.0-20200602225109-6fdc65e7d980 // indirect
 	golang.org/x/tools v0.0.0-20200603170713-0310561d584d // indirect
-	google.golang.org/api v0.26.0 // indirect
+	google.golang.org/api v0.26.0
 	google.golang.org/genproto v0.0.0-20200603110839-e855014d5736 // indirect
 	honnef.co/go/tools v0.0.1-2020.1.4 // indirect
 )
